@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de 70%</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            max-width: 400px;
+            background-color: #f4f4f4;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .section {
+            background-color: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #resultado {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Calculadora - Quanto Falta para 70%</h2>
+
+    <div class="section">
+        <h3>📚 Matérias Teóricas</h3>
+        <label>Primeira Prova Parcial (20%)</label>
+        <input type="number" id="parcial1" min="0" max="20">
+
+        <label>Segunda Prova Parcial (20%)</label>
+        <input type="number" id="parcial2" min="0" max="20">
+
+        <label>Apresentação de Casos Clínicos (3%)</label>
+        <input type="number" id="casos" min="0" max="3">
+
+        <label>Seminário de Apresentação Oral (5%)</label>
+        <input type="number" id="seminario1" min="0" max="5">
+
+        <label>Seminário de Integração de Matérias (5%)</label>
+        <input type="number" id="seminario2" min="0" max="5">
+
+        <label>Assistência (2%)</label>
+        <input type="number" id="assistencia" min="0" max="2">
+    </div>
+
+    <div class="section">
+        <h3>🏥 Matérias Práticas</h3>
+        <label>Primeira Prova Parcial Prática (5%)</label>
+        <input type="number" id="pratica1" min="0" max="5">
+
+        <label>Segunda Prova Parcial Prática (5%)</label>
+        <input type="number" id="pratica2" min="0" max="5">
+
+        <label>Exame Teórico (30%)</label>
+        <input type="number" id="exameTeorico" min="0" max="30">
+
+        <label>Exame Prático (10%)</label>
+        <input type="number" id="examePratico" min="0" max="10">
+    </div>
+
+    <button onclick="calcularFaltante()">Calcular Quanto Falta</button>
+
+    <div id="resultado"></div>
+
+    <script>
+        function calcularFaltante() {
+            let parcial1 = parseFloat(document.getElementById("parcial1").value) || 0;
+            let parcial2 = parseFloat(document.getElementById("parcial2").value) || 0;
+            let pratica1 = parseFloat(document.getElementById("pratica1").value) || 0;
+            let pratica2 = parseFloat(document.getElementById("pratica2").value) || 0;
+            let casos = parseFloat(document.getElementById("casos").value) || 0;
+            let seminario1 = parseFloat(document.getElementById("seminario1").value) || 0;
+            let seminario2 = parseFloat(document.getElementById("seminario2").value) || 0;
+            let assistencia = parseFloat(document.getElementById("assistencia").value) || 0;
+            let exameTeorico = parseFloat(document.getElementById("exameTeorico").value) || 0;
+            let examePratico = parseFloat(document.getElementById("examePratico").value) || 0;
+
+            // Somar diretamente as porcentagens informadas
+            let notaAtual = parcial1 + parcial2 + pratica1 + pratica2 + 
+                            casos + seminario1 + seminario2 + assistencia +
+                            exameTeorico + examePratico;
+
+            let falta = 70 - notaAtual;
+            let mensagem = "";
+
+            if (falta <= 0) {
+                mensagem = `✅ Você já atingiu ou superou 70%! Nota atual: <strong>${notaAtual.toFixed(2)}%</strong>`;
+            } else {
+                mensagem = `⚠️ Você precisa de pelo menos <strong>${falta.toFixed(2)}%</strong> para chegar a 70%!`;
+            }
+
+            // Adicionar mensagem motivacional
+            if (notaAtual >= 90) {
+                mensagem += "<br>🔥 Uau! Você superou as expectativas! 🚀";
+            } else if (notaAtual >= 70) {
+                mensagem += "<br>🎉 Parabéns! Você atingiu a meta! 👏";
+            } else if (notaAtual >= 60) {
+                mensagem += "<br>🙌 Quase lá! Só mais um pouco!";
+            } else if (notaAtual >= 50) {
+                mensagem += "<br>💯 Falta pouco para os 70%! Continue firme!";
+            } else if (notaAtual >= 40) {
+                mensagem += "<br>🏆 Metade do caminho! Você está mandando bem!";
+            } else if (notaAtual >= 30) {
+                mensagem += "<br>🔥 Progresso sólido! Não pare agora!";
+            } else if (notaAtual >= 20) {
+                mensagem += "<br>👍 Você está no caminho certo! Continue assim!";
+            } else if (notaAtual >= 10) {
+                mensagem += "<br>🚀 Ótimo começo! Cada ponto conta!";
+            } else {
+                mensagem += "<br>💪 O primeiro passo já foi dado! Continue firme!";
+            }
+
+            document.getElementById("resultado").innerHTML = mensagem;
+        }
+    </script>
+</body>
+</html>
